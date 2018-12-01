@@ -17,7 +17,7 @@ class WorkoutForm extends Component {
         rowList: [...prevState.rowList, ""],
       }));
     }
-
+    
     render() {
       const {rowList} = this.state;
       
