@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Glyphicon, ListGroup, ListGroupItem, Button} from 'react-bootstrap';
+import {Glyphicon, ListGroup, ListGroupItem, Button, ButtonToolbar, ToggleButton, ToggleButtonGroup} from 'react-bootstrap';
 
 class ClientList extends Component {
 constructor(props) {
@@ -34,10 +34,10 @@ constructor(props) {
 renderClients(client, index) {
   index = index + 1
   return (
-    <ListGroupItem onClick={(e) => this.handleClientOnClick(index, e)}>
-      <Glyphicon glyph={client.image} />
-      {client.name}
-    </ListGroupItem>
+    <ToggleButton value={index} onClick={(e) => this.handleClientOnClick(index, e)}>
+      <Glyphicon glyph={client.image}/>
+      {client.name} 
+    </ToggleButton>
   )
 }
 
@@ -51,9 +51,11 @@ handleClientOnClick(index, e) {
   render() {
     return (
       <div >
-        <ListGroup>
-          {this.state.clientArray.map(this.renderClients.bind(this))}
-        </ListGroup>
+        <ButtonToolbar vertical block>
+          <ToggleButtonGroup vertical block type="checkbox">
+            {this.state.clientArray.map(this.renderClients.bind(this))}
+          </ToggleButtonGroup>
+        </ButtonToolbar>
       </div>
     );
   }

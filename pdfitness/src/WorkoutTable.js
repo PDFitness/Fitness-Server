@@ -8,10 +8,12 @@ class WorkoutTable extends Component {
       showClientsPopUp: false,
       selectedWorkout: 0,
      };
+    this.clientList = null;
 
     // This binding is necessary to make `this` work in the callback
     this.handleAssignOnClick = this.handleAssignOnClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleAssignSubmit = this.handleAssignSubmit.bind(this);
   }
 
   workoutArray = [
@@ -37,6 +39,19 @@ class WorkoutTable extends Component {
     //alert(index);
     /* open clients list pop up*/
     this.setState({ showClientsPopUp: true, selectedWorkout: index });
+  }
+
+  handleAssignSubmit() {
+    let clientListTemp = this.clientList.state.clientArray;
+    let selected = [];
+    for(let i=0; i<clientListTemp.length; i++){
+      if (clientListTemp[i].selected) {
+        console.log(i);
+        selected.push(i);
+      }
+    }
+    console.log(selected);
+    this.handleClose();
   }
 
   renderWorkouts(workout, index) {
@@ -76,11 +91,14 @@ class WorkoutTable extends Component {
           </Modal.Header>
           <Modal.Body>
             <h4>Assign Workout To Clients</h4>
-            <ClientList/>
+
+            <ClientList ref={(clientList) => {this.clientList = clientList;}}
+            />
             
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleClose}>Close</Button>
+            <Button onClick={this.handleAssignSubmit}>Assign</Button>
           </Modal.Footer>
         </Modal>
 </div>

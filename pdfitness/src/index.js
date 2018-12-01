@@ -7,7 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import WorkoutForm from './WorkoutForm';
 
 //ReactDOM.render(<App />, document.getElementById('root'));
-ReactDOM.render(<Workout />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 
 
 // If you want your app to work offline and load faster, you can change
