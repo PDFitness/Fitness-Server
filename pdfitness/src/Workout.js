@@ -55,6 +55,7 @@ class WorkoutForm extends Component {
                         id="dropdown-basic"
                         selectedOption = {this.state.selectedOption}
                         onSelect={this.handleSelect.bind(this)}
+                        style = {{width: 150}}
                         >
                         {options.map((opt, i) => (
                         <MenuItem key={i} eventKey={i} >

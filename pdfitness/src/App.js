@@ -4,21 +4,30 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import WorkoutForm from './WorkoutForm';
 import WorkoutTable from './WorkoutTable';
-import { Navbar } from 'react-bootstrap';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
 class App extends Component {
   render() {
     return (
       <Router>
         <div>
-          <h2>Welcome to React Router Tutorial</h2>
-          <Navbar navbar-expand-lg navbar-light bg-light>
-          <ul className="navbar-nav mr-auto">
-            <li><Link to={'/'} className="nav-link"> Home </Link></li>
+          <h2>Welcome to PD-Fitness </h2>
+          
+        <Navbar>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <a href="#home">PD-Fitness</a>
+            </Navbar.Brand>
+          </Navbar.Header>
+          <Nav>
+            <NavItem eventKey={1} href="#">
             <li><Link to={'/AddWorkout'} className="nav-link">Add Workout</Link></li>
+            </NavItem>
+            <NavItem eventKey={2} href="#">
             <li><Link to={'/Workouts'} className="nav-link">All Workouts</Link></li>
-          </ul>
-          </Navbar>
+            </NavItem>
+          </Nav>
+        </Navbar>
           <hr />
           <Switch>
               <Route exact path='/' component={WorkoutTable} />
@@ -30,5 +39,7 @@ class App extends Component {
     );
   }
 }
+
+
 
 export default App;

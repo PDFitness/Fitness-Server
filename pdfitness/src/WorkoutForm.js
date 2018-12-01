@@ -25,10 +25,14 @@ class WorkoutForm extends Component {
         
         <Grid>
           {<Workout/>}
+          {<Workout/>}
+          {<Workout/>}
           {rowList.map(() => {  
             return (<Workout/>)
           })}
           <Button onClick={this.addRow}>Add</Button>
+          <Button onClick={this.addRow}>Submit</Button>
+          <Button onClick={this.addRow}>Cancel</Button>
         </Grid>
       )
       }
