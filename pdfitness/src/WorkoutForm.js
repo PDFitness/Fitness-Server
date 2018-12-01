@@ -7,46 +7,31 @@ const options = ["Running", "Dumbbell Curls"];
 class WorkoutForm extends Component {
     constructor(props, context) {
       super(props, context);
-      // this.addRow = this.addRow.bind(this);
-      this.state = {numOfChildren: 0};
+      this.state = {
+        rowList:[]
+      };
     }
 
-
-    addRow() {
-      let newRow = <Workout/>
+    addRow = (e) => {
+      this.setState((prevState) => ({
+        rowList: [...prevState.rowList, ""],
+      }));
     }
-    // onAddRow = () => {
-    //   this.setState({
-    //     numChildren: this.state.numChildren + 1
-    //   });
-    // }
-    
 
     render() {
-      const children = [];
-      for (var i = 0; i < this.statenumOfChildren; i++) {
-        children.push(<Workout/>);
-      };
+      const {rowList} = this.state;
       
       return (
-        <Parent addRow={this.onAddRow}>
-          {children}
-        </Parent>
-      );
-
-
-    }
-
-
-   
-
-
-  
+        
+        <Grid>
+          {<Workout/>}
+          {rowList.map(() => {  
+            return (<Workout/>)
+          })}
+          <Button onClick={this.addRow}>Add</Button>
+        </Grid>
+      )
+      }
   }
-  const Parent = props => (
-    <Grid>
-       <Button onClick={props.onAddRow}>Add component</Button>
-              {props.children}
-    </Grid>
-  );
+  
   export default WorkoutForm;

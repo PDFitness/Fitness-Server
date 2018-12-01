@@ -62,7 +62,7 @@ class WorkoutForm extends Component {
                         </MenuItem>  ))}
                     </DropdownButton>
               </FormGroup>
-
+                            
               <FormGroup
                 controlId="formBasicText"
                 validationState={this.getValidationStateReps()}
