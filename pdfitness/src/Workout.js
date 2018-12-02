@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {FormControl, ControlLabel, FormGroup, HelpBlock, ButtonToolbar, DropdownButton, MenuItem, Button, Row, Col, Grid, Form} from 'react-bootstrap';
+import {FormControl, ControlLabel, FormGroup, DropdownButton, MenuItem, Button, Row, Col, Grid, Form} from 'react-bootstrap';
 
 const options = ["Running", "Dumbbell Curls"];
 
@@ -63,7 +63,19 @@ class WorkoutForm extends Component {
                         </MenuItem>  ))}
                     </DropdownButton>
               </FormGroup>
-                            
+              <FormGroup
+                controlId="formBasicText"
+                validationState={this.getValidationStateReps()}
+                >
+                    <ControlLabel>Activity Name</ControlLabel>
+                    <FormControl
+                      type="test"
+                      reps={this.state.reps}
+                      placeholder="Activity Name"
+                      onChange={this.handleChangeReps}
+                    />
+                    <FormControl.Feedback />
+              </FormGroup>
               <FormGroup
                 controlId="formBasicText"
                 validationState={this.getValidationStateReps()}
