@@ -6,7 +6,6 @@ import Workout from './WorkoutTable';
 import * as serviceWorker from './serviceWorker';
 import WorkoutForm from './WorkoutForm';
 
-//ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(<App />, document.getElementById('root'));
 
 

@@ -3,6 +3,7 @@ import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import WorkoutForm from './WorkoutForm';
 import WorkoutTable from './WorkoutTable';
+import ActiveWorkout from './ActiveWorkout';
 
 class NavigationBar extends Component{
     render() {
@@ -24,6 +25,9 @@ class NavigationBar extends Component{
             <NavItem eventKey={2} href="#">
             <li><Link to={'/Workouts'} className="nav-link">All Workouts</Link></li>
             </NavItem>
+            <NavItem eventKey={3} href="#">
+            <li><Link to={'/ActiveWorkout'} className="nav-link">Active Workout</Link></li>
+            </NavItem>
           </Nav>
         </Navbar>
           <hr />
@@ -31,6 +35,7 @@ class NavigationBar extends Component{
               <Route exact path='/' component={WorkoutTable} />
               <Route path='/AddWorkout' component={WorkoutForm} />
               <Route path='/Workouts' component={WorkoutTable} />
+              <Route path='/ActiveWorkout' component={ActiveWorkout} />
           </Switch>
         </div>
       </Router>

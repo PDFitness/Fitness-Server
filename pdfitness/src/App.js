@@ -6,12 +6,10 @@ class App extends Component {
   render() {
     return (
       <div>
-      <NavigationBar/>;
+      <NavigationBar/>
       </div>
     );
   }
 }
-
-
 
 export default App;
