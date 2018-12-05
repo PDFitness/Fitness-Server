@@ -1,6 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Create Postgres 10.6 database
+Download version 10.6 https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+
 
 ### Create `.env` file in <path_to_project>/pdfitness/.env
 Put the following values in .env and DO NOT COMMIT:
