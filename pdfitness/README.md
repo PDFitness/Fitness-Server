@@ -1,8 +1,24 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Create Postgres 10.6 database
+
+### Create `.env` file in <path_to_project>/pdfitness/.env
+Put the following values in .env and DO NOT COMMIT:
+
+DATABASE_NAME=pdfitness
+DATABASE_URL=postgres://localhost:5432/
+DATABASE_USERNAME=username
+DATABASE_PASSWORD=password
+DATABASE_PORT=5432
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm run seed`
+Seed the database with dummy data.
 
 ### `npm start`
 
