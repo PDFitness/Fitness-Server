@@ -1,0 +1,102 @@
+select * from person;
+
+insert into person(firstname,lastname,email,phone,profilepicture,information)
+values ('Bobby', 'Jim', 'bobjim@test.com', '613-123-4567', null, 'testing user 1');
+
+insert into person(firstname,lastname,email,phone,profilepicture,information)
+values ('Joe', 'Tim', 'JT@test.com', '613-123-4444', null, 'testing user 2');
+
+select * from coach;
+
+insert into coach(personid) values (1);
+
+select coach.coachid, coach.personid, person.personid, Person.firstname, person.lastname from coach, person where coach.personid=person.personid;
+
+insert into client(personid) values (2);
+select client.clientid, client.personid, person.personid, Person.firstname, person.lastname from client, person where client.personid=person.personid;
+
+select * from trains;
+insert into trains(coachid,clientid) values (1,1);
+
+select * from trains, coach, client, person as pcoach
+where coach.coachid = trains.coachid and pcoach.personid=coach.personid;
+
+select * from trains, client, person as p
+where client.clientid = trains.clientid and p.personid=client.personid;
+
+
+/*insert into workout*/
+insert into Workout(workoutname,notes,coachid) values ('Workout 1 new years', 'This is a test workout. First one of many...',1);
+
+/*insert into exercise*/
+insert into exercise(exercisename,ExerciseDescription) values ('Running', null);
+insert into exercise(exercisename,ExerciseDescription) values ('Treadmill Run at 15%', null);
+insert into exercise(exercisename,ExerciseDescription) values ('Bicep Curl', 'Use 2 dumbells or a long bar and curl in front.');
+insert into exercise(exercisename,ExerciseDescription) values ('Chest Bench Press', 'Lying down on a bench press weight from chest.');
+insert into exercise(exercisename,ExerciseDescription) values ('Barbell Back Squat', null);
+insert into exercise(exercisename,ExerciseDescription) values ('Barbell Front Squat', null);
+insert into exercise(exercisename,ExerciseDescription) values ('Burpee', 'Jump up with hands above head and feet leave the ground, then down to a push up position with chest on the ground.');
+
+
+/*running for 3min*/
+insert into Includes(workoutid,exerciseid,Repetitions,Duration,Distance,Weight,Pace) 
+values (1,1,null,'00:03:00',null,null,null);
+/* 15% run for 2min*/
+insert into Includes(workoutid,exerciseid,Repetitions,Duration,Distance,Weight,Pace) 
+values (1,2,null,'00:02:00',null,null,null);
+/* 10 burpees*/
+insert into Includes(workoutid,exerciseid,Repetitions,Duration,Distance,Weight,Pace) 
+values (1,7,10,null,null,null,null);
+
+
+/*competed workout*/
+insert into Conducts(workoutid,clientid,completeddate,totaltime,assigndate)
+values (1,1,'2019-01-01', '00:07:30', null);
+/*new workout for jan 7th*/
+insert into Conducts(workoutid,clientid,completeddate,totaltime,assigndate)
+values (1,1,null,null,'2019-01-07');
+/*new workout no date*/
+insert into Conducts(workoutid,clientid,completeddate,totaltime,assigndate)
+values (1,1,null,null,null);
+
+
+
+
+
+
+
+
+
+/* SELECT statements */
+select * from exercise;
+select * from person;
+select * from coach;
+select * from client;
+select * from workout;
+select * from trains;
+select * from Includes;
+select * from conducts;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

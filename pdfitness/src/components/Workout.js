@@ -3,7 +3,7 @@ import {FormControl, ControlLabel, FormGroup, DropdownButton, MenuItem, Button, 
 
 const options = ["Running", "Dumbbell Curls"];
 
-class WorkoutForm extends Component {
+class Workout extends Component {
     constructor(props, context) {
       super(props, context);
   
@@ -13,7 +13,7 @@ class WorkoutForm extends Component {
       this.state = {
         reps: Number,
         duration: Number,
-        selectedOption: "Select Workout"
+        selectedOption: "Select Execise"
       };
     }
   
@@ -67,19 +67,6 @@ class WorkoutForm extends Component {
                 controlId="formBasicText"
                 validationState={this.getValidationStateReps()}
                 >
-                    <ControlLabel>Activity Name</ControlLabel>
-                    <FormControl
-                      type="test"
-                      reps={this.state.reps}
-                      placeholder="Activity Name"
-                      onChange={this.handleChangeReps}
-                    />
-                    <FormControl.Feedback />
-              </FormGroup>
-              <FormGroup
-                controlId="formBasicText"
-                validationState={this.getValidationStateReps()}
-                >
                     <ControlLabel>Number of Reps</ControlLabel>
                     <FormControl
                       type="number"
@@ -114,12 +101,9 @@ class WorkoutForm extends Component {
         {this.addRow()}
 
         </Grid>                          
-                          
-         
 
-        
       );
     }
   }
   
-  export default WorkoutForm;
+  export default Workout;

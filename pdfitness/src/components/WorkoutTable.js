@@ -1,6 +1,25 @@
 import React, { Component } from 'react';
 import ClientList from './ClientList'
 import { Table, Button, Modal} from 'react-bootstrap';
+
+//db test
+import * as Actions from '../actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+  //testing db
+function mapStateToProps(state) {
+    return {
+      results: state.demo.results
+    }
+  }
+  
+function mapDispatchToProps(dispatch) {
+    return {
+      actions: bindActionCreators(Actions, dispatch)
+    };
+  }
+
 class WorkoutTable extends Component { 
   constructor(props) {
     super(props);
@@ -67,10 +86,12 @@ class WorkoutTable extends Component {
   }
   
   render () {
-
+    const { ...props } = this.props;
       return (
         <div>
           <h1>Workouts</h1>
+          <button onClick={this.props.actions.dbTest}>Test if Express and Sequelize are working</button>
+        <div style={{ padding: '30px' }}>{this.props.results}</div>
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -107,4 +128,5 @@ class WorkoutTable extends Component {
    }
 }
 
-export default WorkoutTable;
+//export default WorkoutTable;
+export default connect(mapStateToProps, mapDispatchToProps)(WorkoutTable);

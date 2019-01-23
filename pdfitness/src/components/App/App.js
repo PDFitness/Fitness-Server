@@ -27,12 +27,11 @@ class App extends Component {
         <br />
         <button onClick={this.props.actions.dbTest}>Test if Express and Sequelize are working</button>
         <div style={{ padding: '30px' }}>{this.props.results}</div>
-    */}
+    
 
-      <button onClick={this.props.actions.dbTest}>Test if Express and Sequelize are working</button>
-        <div style={{ padding: '30px' }}>{this.props.results}</div>
       
-        <NavigationBar/>
+      */}
+        <NavigationBar {...props}/>
       
 
       </div>

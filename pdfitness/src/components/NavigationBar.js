@@ -1,44 +1,46 @@
 import React, { Component } from 'react';
-import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
+import {Navbar, Nav, NavItem, NavDropdown, MenuItem, Tabs, Tab, Button} from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 import WorkoutForm from './WorkoutForm';
 import WorkoutTable from './WorkoutTable';
 import ActiveWorkout from './ActiveWorkout';
-
+import './NavigationBar.css';
+import './ComponentStyle.css';
 class NavigationBar extends Component{
+
     render() {
+      const { ...props } = this.props;
         return (
           <Router>
-        <div>
-          <h2>Welcome to PD-Fitness </h2>
-          
-        <Navbar>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <a href="#home">PD-Fitness</a>
-            </Navbar.Brand>
-          </Navbar.Header>
-          <Nav>
-            <NavItem eventKey={1} href="#">
-            <li><Link to={'/AddWorkout'} className="nav-link">Add Workout</Link></li>
-            </NavItem>
-            <NavItem eventKey={2} href="#">
-            <li><Link to={'/Workouts'} className="nav-link">All Workouts</Link></li>
-            </NavItem>
-            <NavItem eventKey={3} href="#">
-            <li><Link to={'/ActiveWorkout'} className="nav-link">Active Workout</Link></li>
-            </NavItem>
-          </Nav>
-        </Navbar>
-          <hr />
-          <Switch>
-              <Route exact path='/' component={WorkoutTable} />
-              <Route path='/AddWorkout' component={WorkoutForm} />
-              <Route path='/Workouts' component={WorkoutTable} />
-              <Route path='/ActiveWorkout' component={ActiveWorkout} />
-          </Switch>
-        </div>
-      </Router>
+            <div className='fullheight'>
+            <Navbar bsStyle='tabs' className='navbarstyle'>
+              <Navbar.Header>
+                <Navbar.Brand className='navbarbrand'>
+                  <a href="#">PD-Fitness</a>
+                </Navbar.Brand>
+              </Navbar.Header>
+              <Nav >
+                <LinkContainer to={'/AddWorkout'} className="navbartext">
+                  <NavItem eventKey={1} href="#" >Add Workout</NavItem>
+                </LinkContainer>
+                <LinkContainer to={'/Workouts'}>
+                  <NavItem eventKey={2} href="#">All Workouts</NavItem>
+                </LinkContainer>
+                <LinkContainer to={'/ActiveWorkout'}>
+                  <NavItem eventKey={3} href="#">Active Workout</NavItem>
+                </LinkContainer>
+              </Nav>
+            </Navbar>
+              <hr />
+              <Switch>
+                  <Route exact path='/' render={() => <WorkoutTable />} />
+                  <Route path='/AddWorkout' render={() => <WorkoutForm />} />
+                  <Route path='/Workouts' render={() => <WorkoutTable />} />
+                  <Route path='/ActiveWorkout' component={ActiveWorkout} />
+              </Switch>
+            </div>
+          </Router>
         );
     }
 

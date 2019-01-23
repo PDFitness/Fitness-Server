@@ -1,0 +1,57 @@
+.container {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+/*
+.navbar-style {
+  background: rgb(0, 145, 255);
+  color: red;
+}
+
+.navbar-style > ul > li {
+  color: yellow;
+  background: blue;
+}
+*/
+/*.navbartext:selected {
+  color: red;
+  background: purple;
+}
+
+.navbartext:hover {
+  color:purple;
+}*/
+
+.navbarstyle {
+  background-color: rgb(95, 87, 255);
+  color:black;
+  border-radius: 0;
+}
+
+.navbarbrand, .navbarbrand:focus{
+  color: rgb(168, 236, 253);
+}
+
+.navbarbrand:hover {
+  color: rgb(77, 217, 252);
+}
+
+
+
+/* Inactive tab */
+.navbarstyle ul > li > a {
+  background-color: transparent;
+  color: white;
+}
+.navbarstyle ul > li > a:hover {
+  background-color: rgb(68, 19, 247);
+}
+
+/* Active tab */
+.navbarstyle ul > li.active > a,
+.navbarstyle ul > li.active > a:hover,
+.navbarstyle ul > li.active > a:focus {
+  background-color: rgb(53, 4, 165);
+  color: white;
+}

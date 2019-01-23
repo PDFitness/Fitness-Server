@@ -1,0 +1,91 @@
+DROP TABLE IF EXISTS Exercise CASCADE;
+DROP TABLE IF EXISTS Person CASCADE;
+DROP TABLE IF EXISTS Coach CASCADE;
+DROP TABLE IF EXISTS Client CASCADE;
+DROP TABLE IF EXISTS Workout CASCADE;
+DROP TABLE IF EXISTS Trains CASCADE;
+DROP TABLE IF EXISTS Contains CASCADE;
+DROP TABLE IF EXISTS Conducts CASCADE;
+
+CREATE TABLE Exercise
+(
+  ExerciseID SERIAL NOT NULL,
+  ExerciseName VARCHAR(100) NOT NULL,
+  ExerciseDescription VARCHAR(250),
+  PRIMARY KEY (ExerciseID)
+);
+
+CREATE TABLE Person
+(
+  personID SERIAL NOT NULL,
+  FirstName VARCHAR(50) NOT NULL,
+  LastName VARCHAR(50) NOT NULL,
+  Email VARCHAR(100) NOT NULL,
+  Phone VARCHAR(50),
+  ProfilePicture VARCHAR(250),
+  Information VARCHAR(1000) NOT NULL,
+  PRIMARY KEY (personID)
+);
+
+CREATE TABLE Coach
+(
+  CoachID SERIAL NOT NULL,
+  personID INT NOT NULL,
+  PRIMARY KEY (CoachID),
+  FOREIGN KEY (personID) REFERENCES Person(personID)
+);
+
+CREATE TABLE Client
+(
+  ClientID SERIAL NOT NULL,
+  personID INT NOT NULL,
+  PRIMARY KEY (ClientID),
+  FOREIGN KEY (personID) REFERENCES Person(personID)
+);
+
+CREATE TABLE Workout
+(
+  WorkoutID SERIAL NOT NULL,
+  WorkoutName VARCHAR(100) NOT NULL,
+  Notes VARCHAR(500),
+  CoachID INT NOT NULL,
+  PRIMARY KEY (WorkoutID),
+  FOREIGN KEY (CoachID) REFERENCES Coach(CoachID)
+);
+
+CREATE TABLE Trains
+(
+  CoachID INT NOT NULL,
+  ClientID INT NOT NULL,
+  PRIMARY KEY (CoachID, ClientID),
+  FOREIGN KEY (CoachID) REFERENCES Coach(CoachID),
+  FOREIGN KEY (ClientID) REFERENCES Client(ClientID)
+);
+
+//changed form contains to includes
+CREATE TABLE Includes
+(
+  WorkoutID INT NOT NULL,
+  ExerciseID INT NOT NULL,
+  Repetitions INT,
+  Duration TIME,
+  Distance INT,
+  Weight INT,
+  Pace INT,
+  PRIMARY KEY (WorkoutID, ExerciseID),
+  FOREIGN KEY (WorkoutID) REFERENCES Workout(WorkoutID),
+  FOREIGN KEY (ExerciseID) REFERENCES Exercise(ExerciseID)
+);
+
+CREATE TABLE Conducts
+(
+  WorkoutID INT NOT NULL,
+  ClientID INT NOT NULL,
+  CompletedDate DATE,
+  TotalTime TIME,
+  AssignDate DATE,
+  PRIMARY KEY (WorkoutID, ClientID),
+  FOREIGN KEY (WorkoutID) REFERENCES Workout(WorkoutID),
+  FOREIGN KEY (ClientID) REFERENCES Client(ClientID)
+);
+

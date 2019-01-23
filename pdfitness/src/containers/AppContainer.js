@@ -15,5 +15,9 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(Actions, dispatch)
   };
 }
+/*
+export function connectToComponent(component) {
+  connect(mapStateToProps, mapDispatchToProps)(component)
+}*/
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

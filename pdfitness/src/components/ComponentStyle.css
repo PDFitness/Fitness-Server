@@ -1,0 +1,90 @@
+.container {
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.fullheight {
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.right-vertical-align {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+  }
+
+.vertical-middle {
+  display: table-cell;
+  vertical-align: middle;
+  right: 0;
+  }
+
+.flex-display {
+  display: flex;
+}
+
+.flex-align-center {
+  align-items: center;
+}
+
+.flex-right {
+  justify-content: flex-end;
+  }
+
+.flex-center {
+  justify-content: center;
+  }
+
+.ListGroupItem-hover:hover {
+  background: rgb(180, 207, 249);
+} 
+
+.exercise-row {
+  margin-left: 10px;
+  margin-right: 0px;
+  box-shadow: 1px 1px 3px 3px rgb(230, 230, 230);
+}
+
+.exercise-row:hover {
+  background: rgb(180, 207, 249);
+  border: black;
+}
+
+.details-row {
+  display: flex;
+  justify-content: center;
+}
+
+.text {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.img-center {
+  display: block;
+  margin: 0 auto;
+}
+
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+
+.btn-transparent {
+  background: transparent;
+  border:0;
+  box-shadow: none;
+}
+
+.btn-transparent:hover {
+  background: lightgrey;
+}
+
+.maxcol {
+  margin-bottom: -9999px;
+  padding-bottom: 9999px;
+}
