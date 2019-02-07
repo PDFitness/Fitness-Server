@@ -1,13 +1,47 @@
 import React, { Component } from 'react';
 import { Grid, Button, ButtonGroup, Col, Row, Jumbotron, ListGroup, ListGroupItem, Glyphicon} from 'react-bootstrap';
 import { Form, FormGroup, FormControl, InputGroup, Modal } from 'react-bootstrap';
+import { Scrollbars } from 'react-custom-scrollbars';
 import './ComponentStyle.css'
-
-const options = ["Running", "Dumbbell Curls"];
 
 class ExerciseList extends Component {
     constructor(props, context) {
       super(props, context);
+    }
+
+    exerciseArray = [
+      {id: 1, name:"Running"},
+      {id: 2, name:"Pushup"},
+      {id: 3, name:"Pullup"},
+      {id: 4, name:"Horizontal Bench Press"},
+      {id: 5, name:"Bicep Curl"},
+      {id: 6, name:"Tricep Dip"},
+      {id: 7, name:"Bentover Row"},
+      {id: 8, name:"Back Barbell Squat"},
+      {id: 9, name:"Front Barbell Squat"},
+      {id: 10, name:"Incline Bench Press"},
+      {id: 11, name:"Calf Raises"},
+      {id: 12, name:"Bicycle Crunches"},
+      {id: 13, name:"Lunges"},
+      {id: 14, name:"Back Extension"},
+      {id: 15, name:"Running"},
+      {id: 16, name:"Running"},
+      {id: 17, name:"Running"},
+      {id: 18, name:"Running"},
+      {id: 19, name:"Running"},
+      {id: 20, name:"Running"},
+      ];
+
+    renderExercises(exercise, index) {
+      index = index + 1
+      return (
+        <ListGroupItem  className="ListGroupItem-hover">
+        {exercise.name}
+        <Button className="right-vertical-align btn-transparent" onClick={ () => {this.props.addExerciseToWorkout(exercise)}}>
+          <Glyphicon glyph="plus"/>
+        </Button>
+      </ListGroupItem>
+      )
     }
  
     render() {
@@ -36,49 +70,8 @@ class ExerciseList extends Component {
           </Row>
 
           <Row>
-            <ListGroup style={{padding:10, height: "100%"}}>
-              <ListGroupItem className="ListGroupItem-hover">
-                Running
-                <Button className="right-vertical-align btn-transparent" onClick={this.addRow}>
-                  <Glyphicon glyph="plus"/>
-                </Button>
-              </ListGroupItem>
-              <ListGroupItem className="ListGroupItem-hover">
-                Bicep Curl
-                <Button className="right-vertical-align btn-transparent" onClick={this.addRow}>
-                  <Glyphicon glyph="plus"/>
-                </Button>
-              </ListGroupItem>
-              <ListGroupItem  className="ListGroupItem-hover">
-                Cycling
-                <Button className="right-vertical-align btn-transparent" onClick={this.addRow}>
-                  <Glyphicon glyph="plus"/>
-                </Button>
-              </ListGroupItem>
-              <ListGroupItem  className="ListGroupItem-hover">
-                Back Barbell Squat
-                <Button className="right-vertical-align btn-transparent" onClick={this.addRow}>
-                  <Glyphicon glyph="plus"/>
-                </Button>
-              </ListGroupItem>
-              <ListGroupItem>
-                Horizontal Bench Press
-                <Button className="right-vertical-align btn-transparent" onClick={this.addRow}>
-                  <Glyphicon glyph="plus"/>
-                </Button>
-              </ListGroupItem>
-              <ListGroupItem>
-                Incline Bench Press
-                <Button className="right-vertical-align btn-transparent" onClick={this.addRow}>
-                  <Glyphicon glyph="plus"/>
-                </Button>
-              </ListGroupItem>
-              <ListGroupItem>
-                Pullup
-                <Button className="right-vertical-align btn-transparent" onClick={this.addRow}>
-                  <Glyphicon glyph="plus"/>
-                </Button>
-              </ListGroupItem>
+            <ListGroup className='exerciselist'>
+              {this.exerciseArray.map(this.renderExercises.bind(this))}
             </ListGroup>
           </Row>
         </div>

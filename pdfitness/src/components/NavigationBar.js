@@ -14,7 +14,7 @@ class NavigationBar extends Component{
         return (
           <Router>
             <div className='fullheight'>
-            <Navbar bsStyle='tabs' className='navbarstyle'>
+            <Navbar id='navbar' bsStyle='tabs' className='navbarstyle'>
               <Navbar.Header>
                 <Navbar.Brand className='navbarbrand'>
                   <a href="#">PD-Fitness</a>
@@ -32,7 +32,7 @@ class NavigationBar extends Component{
                 </LinkContainer>
               </Nav>
             </Navbar>
-              <hr />
+              
               <Switch>
                   <Route exact path='/' render={() => <WorkoutTable />} />
                   <Route path='/AddWorkout' render={() => <WorkoutForm />} />

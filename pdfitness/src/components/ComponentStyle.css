@@ -1,13 +1,13 @@
-.container {
-  height: 100%;
+/*.container {
+  height: 100vh;
   overflow-y: hidden;
 }
 
 .fullheight {
-  height: 100%;
-  overflow-y: hidden;
+  height: 100vh;
+  overflow-y: scroll;
 }
-
+*/
 .right-vertical-align {
     position: absolute;
     top: 50%;
@@ -84,7 +84,51 @@
   background: lightgrey;
 }
 
-.maxcol {
+/*.maxcol {
   margin-bottom: -9999px;
   padding-bottom: 9999px;
+}*/
+
+.exerciselist {
+  
+  height: calc(100vh - 230px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+}
+
+.workoutexercises {
+  height: calc(100vh - 150px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+.inline {
+  display: inline-block;
+  vertical-align: middle;
+}
+.wrap {
+  display: table;
+  height:  100px;
+  padding: 10px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  table-layout: fixed;
+}
+.wrap span {
+  display: table-cell;
+  vertical-align: middle;
 }

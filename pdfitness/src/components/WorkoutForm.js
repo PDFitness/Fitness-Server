@@ -28,33 +28,19 @@ class WorkoutForm extends Component {
     constructor(props, context) {
       super(props, context);
       this.state = {
-        rowList:[],
+        workoutExerciseList:[],
         redirect: false,
-        showEditExercise: false
+        showEditExercise: false,
       };
-      this.workoutList = ["rip"];
-      this.workoutListIndex = 0;
-      this.handleShow = this.handleShow.bind(this);
-      this.handleClose = this.handleClose.bind(this);
+      this.addExerciseToWorkout = this.addExerciseToWorkout.bind(this);
+      this.removeExerciseFromWorkout = this.removeExerciseFromWorkout.bind(this);
     }
 
-    handleClose() {
-      this.setState({ showEditExercise: false });
-    }
-  
-    handleShow() {
-      this.setState({ showEditExercise: true });
-    }
-
-    addRow = (e) => {
-      this.setState((prevState) => ({
-        rowList: [...prevState.rowList, ""],
-      })); 
-    }
-
-    submitForm = (e) => {
-      console.log(this.state.rowList);
-      this.setRedirect();
+    saveWorkout = (e) => {
+      console.log(this.state.workoutExerciseList);
+      //this.setRedirect();
+      // Save the exercise id's to DB in order.
+      // when retreiving workouts from DB, we will get them in ascending order.
     }
 
     cancel = (e) => {
@@ -74,12 +60,52 @@ class WorkoutForm extends Component {
       }
     }
 
+    addExerciseToWorkout(value) {
+      let workoutExerciseListNew = this.state.workoutExerciseList;
+      let addValue = value;
+      workoutExerciseListNew.push(addValue);
+      this.setState({workoutExerciseList: workoutExerciseListNew});
+      /*console.log(value);*/
+    }
+
+    removeExerciseFromWorkout(index) {
+      console.log(index);
+      console.log(this.state.workoutExerciseList);
+      var workoutExerciseListNew = [...this.state.workoutExerciseList];
+      if (index !== -1) {
+        workoutExerciseListNew.splice(index, 1);
+        this.setState({workoutExerciseList: workoutExerciseListNew});
+      }      
+      console.log(workoutExerciseListNew);
+
+    }
+
+   /* workoutExerciseArray = [
+      {id: 1, name: 'Running', distance: '400m', duration: null, repititions: null, weight: null, hrzone: null},
+      {id: 2, name: 'Running2', distance: null, duration: null, repititions: null, weight: null, hrzone: null},
+      {id: 3, name: 'Running3', distance: null, duration: null, repititions: null, weight: null, hrzone: null},
+      {id: 4, name: 'Running4', distance: null, duration: null, repititions: null, weight: null, hrzone: null},
+      {id: 5, name: 'Running', distance: null, duration: null, repititions: null, weight: null, hrzone: null},
+      {id: 6, name: 'Running', distance: null, duration: null, repititions: null, weight: null, hrzone: null},
+      {id: 7, name: 'Running', distance: null, duration: null, repititions: null, weight: null, hrzone: null},
+      {id: 8, name: 'Running', distance: null, duration: null, repititions: null, weight: null, hrzone: null},
+      {id: 9, name: 'Running', distance: null, duration: null, repititions: null, weight: null, hrzone: null},
+      {id: 10, name: 'Running', distance: null, duration: null, repititions: null, weight: null, hrzone: null},
+    ];
+*/
+    renderWorkoutExercise(workoutExercise, id) {
+      console.log(workoutExercise);
+      console.log(id);
+      return (
+        <Exercise id={id} removeExercise={this.removeExerciseFromWorkout} exercise={workoutExercise}/>
+      )
+    }
+
     render() {
       const {rowList} = this.state;
       const { ...props } = this.props;
       return (       
         <div className='fullheight'>
-
         {/*<Button bsStyle="primary" onClick={this.handleShow}>
           Launch modal
       </Button>*/}
@@ -96,14 +122,14 @@ class WorkoutForm extends Component {
           </Modal.Footer>
         </Modal>
 
-        <Grid style={{ marginLeft: 0, marginRight: 0, height: '100%' }}>
+        <Grid style={{ marginLeft: 0, marginRight: 0, paddingBottom: 10, overflow:'hidden' }}>
           {/*<button onClick={this.props.actions.dbTest}>Test if Express and Sequelize are working</button>
           <div style={{ padding: '30px' }}>{this.props.results}</div>*/}
                         {/*<Button onClick={this.addRow}>Add</Button>
               <Button onClick={this.submitForm}>Submit</Button>
               {this.renderRedirect()}
               <Button onClick={this.cancel}>Cancel</Button>*/}
-          <Row  className='maxcol' style={{height: '100%'}}>
+          <Row style={{height: '100%', paddingBottom: 10}}>
             <Col md={8}>
               <InputGroup 
               style={{ width: "100%", paddingBottom: 20, marginLeft: 10, marginRight: 10}}>
@@ -113,21 +139,23 @@ class WorkoutForm extends Component {
                   placeholder="Name Your Workout" />
               </InputGroup>
               <div>
-                <Exercise/>
-                <Exercise/>
-                <Exercise/>
-                {rowList.map(() => {  
-                  return (<Exercise/>)
-                })}
+              <ListGroup className='workoutexercises'>
+            {this.state.workoutExerciseList.map(this.renderWorkoutExercise.bind(this))}
+              </ListGroup>
               </div>
             </Col>
-            <Col md={4} className='maxcol'>
-              <ExerciseList style={{height: 'auto'}}/>
+            <Col md={4}>
+              <ExerciseList addExerciseToWorkout={this.addExerciseToWorkout}/>
+
+              <ButtonGroup className="pull-right" style={{padding:"10px 10px 10px 10px"}}>
+                <Button>Cancel</Button>
+                <Button onClick={this.saveWorkout}>Save</Button>
+              </ButtonGroup>
             </Col>
           </Row>
         </Grid>
 
-        <Button id='savebtn' 
+        {/*<Button id='savebtn' 
         style={{margin: '0px',
           top: 'auto',
           right: '20px',
@@ -135,7 +163,7 @@ class WorkoutForm extends Component {
           left: 'auto',
           position: 'fixed'}}>
         save
-        </Button>
+              </Button>*/}
         </div>
       )
     }

@@ -15,18 +15,22 @@ class Exercise extends Component {
  
     render() {
       return (
-        <div style={{marginBottom: 10}} className='exercise-row'>
+        <div style={{paddingBottom: 10}} className='exercise-row'>
             <Row className="text-center">
-              <Col sm={4} className='vcenter'>
-                <div className="pull-left">
-                  <Image src={runningImage} 
-                  style={{margin: 10, display: 'inline-block', verticalAlign: 'middle', height:100, width:100}}/>  
+              <Col sm={2} className='vcenter'>
+                {/*<div className="pull-left" height={100}>  */}
+                  <Image src={runningImage} className="pull-left"
+                  style={{margin: 10, display: 'inline-block', verticalAlign: 'middle', height:100, width:100}}/>
                   {/*<Avatar name="Running" color={'grey'} 
                   style={{margin: 10, display: 'inline-block', verticalAlign: 'middle'}}/> */}
-                  <span style={{marginRight: 10}}>
-                    <h3 style={{display: "inline", verticalAlign: "middle"}}>Running</h3>
-                  </span>
-                </div>
+                  {/*</div>*/}
+              </Col>
+              <Col sm={4} className='vcenter'>
+                    <div className="wrap">
+                    <span>
+                        {this.props.exercise.name}
+                    </span>
+                    </div>
               </Col>
               <Col sm={4} className='vcenter'>
                 <div>
@@ -36,13 +40,13 @@ class Exercise extends Component {
                   <span style={{marginRight: 10}}>3</span>
                 </div>
               </Col>
-              <Col sm={4} className='vcenter'>
+              <Col sm={2} className='vcenter'>
                 <div className="pull-right">
                   <Button className="btn-transparent">
                     <Glyphicon glyph="edit"/>
                   </Button>
                   <Button className="btn-transparent">
-                    <Glyphicon glyph="remove"/>
+                    <Glyphicon glyph="remove" onClick={ () => {this.props.removeExercise(this.props.id)}}/>
                   </Button>
                 </div>
               </Col>

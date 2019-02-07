@@ -3,30 +3,12 @@
     height: 100%;
     width: 100%;
   }
-/*
-.navbar-style {
-  background: rgb(0, 145, 255);
-  color: red;
-}
-
-.navbar-style > ul > li {
-  color: yellow;
-  background: blue;
-}
-*/
-/*.navbartext:selected {
-  color: red;
-  background: purple;
-}
-
-.navbartext:hover {
-  color:purple;
-}*/
 
 .navbarstyle {
   background-color: rgb(95, 87, 255);
   color:black;
   border-radius: 0;
+  marign-bottom: 20px;
 }
 
 .navbarbrand, .navbarbrand:focus{
