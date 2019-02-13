@@ -35,9 +35,43 @@ const seedReviews = () => db.Promise.map([
  ], review => db.model('reviews').create(review));
 
 const seedExercises = () => db.Promise.map([
-  {exercise_name: "Running", description: "Running with 2 legs.", has_duration: true},
-  {exercise_name: "Bicep curl", description: null, has_duration: null}
-], exercises => db.model('exercises').create(exercises))
+  {exerciseId: 1, exerciseName: "Running", ExerciseDescription: "Running on road or treadmill"},
+  {exerciseId: 2, exerciseName: "Back Barbell Squat", ExerciseDescription: null},
+  {exerciseId: 3, exerciseName: "Push Up", ExerciseDescription: null},
+], exercise => db.model('exercise').create(exercise))
+
+const seedPersons = () => db.Promise.map([
+  {personId: 1, firstName: "client1f", lastName: "client1l", email: "user1@test.com", phone: null, profilePicture: null, Information: null},
+  {personId: 2, firstName: "coach1f", lastName: "coach1l", email: "coach1@test.com", phone: null, profilePicture: null, Information: null},
+], person => db.model('person').create(person))
+
+const seedCoaches = () => db.Promise.map([
+  {personId: 2},
+], coach => db.model('coach').create(coach))
+
+const seedClients = () => db.Promise.map([
+  {personId: 1},
+], client => db.model('client').create(client))
+
+const seedWorkouts = () => db.Promise.map([
+  {workoutId: 1, workoutName: "Workout 1", notes: null, coachId: 1},
+], workout => db.model('workout').create(workout))
+
+const seedTrains = () => db.Promise.map([
+  {coachId: 1, clientId: 1},
+], trains => db.model('trains').create(trains))
+
+const seedIncludes = () => db.Promise.map([
+  {includesId: 1, workoutId: 1, exerciseId: 1, repetitions: null, duration: null, distance: null, weight: null, pace: null},
+  {includesId: 2, workoutId: 1, exerciseId: 2, repetitions: null, duration: null, distance: null, weight: null, pace: null},
+  {includesId: 3, workoutId: 1, exerciseId: 1, repetitions: null, duration: null, distance: null, weight: null, pace: null},
+  {includesId: 4, workoutId: 1, exerciseId: 3, repetitions: null, duration: null, distance: null, weight: null, pace: null},
+], includes => db.model('includes').create(includes))
+
+const seedConducts = () => db.Promise.map([
+  {workoutId: 1, clientId: 1, completedDate: null, totalTime: null, assignDate: null},
+], conducts => db.model('conducts').create(conducts))
+
 
  db.didSync
    .then(() => db.sync({force: true}))
@@ -45,7 +79,21 @@ const seedExercises = () => db.Promise.map([
    .then(products => console.log(`Seeded ${products.length} products OK`))
    .then(seedReviews)
    .then(reviews => console.log(`Seeded ${reviews.length} reviews OK`))*/
+   .then(seedPersons)
+   .then(person => console.log(`Seeded ${person.length} persons OK`))
+   .then(seedCoaches)
+   .then(coach => console.log(`Seeded ${coach.length} coaches OK`))
+   .then(seedClients)
+   .then(client => console.log(`Seeded ${client.length} clients OK`))
    .then(seedExercises)
-   .then(exercises => console.log(`Seeded ${exercises.length} exercises OK`))
+   .then(exercise => console.log(`Seeded ${exercise.length} exercises OK`))
+   .then(seedWorkouts)
+   .then(workout => console.log(`Seeded ${workout.length} workouts OK`))
+   .then(seedTrains)
+   .then(trains => console.log(`Seeded ${trains.length} trains OK`))
+   .then(seedConducts)
+   .then(conducts => console.log(`Seeded ${conducts.length} conducts OK`))
+   .then(seedIncludes)
+   .then(includes => console.log(`Seeded ${includes.length} includes OK`))
    .catch(error => console.error(error))
    .finally(() => db.close())

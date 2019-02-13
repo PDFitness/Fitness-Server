@@ -62,9 +62,10 @@ CREATE TABLE Trains
   FOREIGN KEY (ClientID) REFERENCES Client(ClientID)
 );
 
-//changed form contains to includes
+//changed form 'contains' to 'includes'
 CREATE TABLE Includes
 (
+  includesId SERIAL NOT NULL,
   WorkoutID INT NOT NULL,
   ExerciseID INT NOT NULL,
   Repetitions INT,
