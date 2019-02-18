@@ -3,18 +3,18 @@
 const Sequelize = require('sequelize')
 const db = require('../index.js');
 
-const Conducts = db.define('conducts', {
-  CompletedDate: {
+const Assigns = db.define('assigns', {
+  completed_date: {
     type: Sequelize.DATE,
   	allowNull: true,
     defaultValue: null
   },
-  AssignDate: {
+  assign_date: {
     type: Sequelize.DATE,
     allowNull: true,
     defaultValue: null
   },
-  TotalTime: {
+  total_time: {
     type: Sequelize.TIME,
     allowNull: true,
     defaultValue: null
@@ -22,4 +22,4 @@ const Conducts = db.define('conducts', {
 },
 {freezeTableName: true})
 
-module.exports = Conducts;
+module.exports = Assigns;

@@ -4,9 +4,36 @@ import { Form, FormGroup, FormControl, InputGroup, Modal } from 'react-bootstrap
 import { Scrollbars } from 'react-custom-scrollbars';
 import './ComponentStyle.css'
 
+//db test
+import * as Actions from '../actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+  //testing db
+function mapStateToProps(state) {
+    return {
+      results: state.demo.results
+    }
+  }
+  
+function mapDispatchToProps(dispatch) {
+    return {
+      actions: bindActionCreators(Actions, dispatch)
+    };
+  }
+
 class ExerciseList extends Component {
     constructor(props, context) {
       super(props, context);
+
+      this.state = {
+        exerciseArray: [],
+      };
+    }
+
+    componentDidMount() {
+      console.log("Loading exrecise list");
+      this.props.actions.dbExercises();
     }
 
     exerciseArray = [
@@ -35,13 +62,30 @@ class ExerciseList extends Component {
     renderExercises(exercise, index) {
       index = index + 1
       return (
-        <ListGroupItem  className="ListGroupItem-hover">
+        /*<ListGroupItem  className="ListGroupItem-hover">
         {exercise.name}
+        <Button className="right-vertical-align btn-transparent" onClick={ () => {this.props.addExerciseToWorkout(exercise)}}>
+          <Glyphicon glyph="plus"/>
+        </Button>
+      </ListGroupItem>*/
+      /*{id: 1, exercise_name: "Running", exercise_description: "Running on road or treadmill", 
+      createdAt: "2019-02-18T00:18:48.431Z", updatedAt: "2019-02-18T00:18:48.431Z"}*/
+      <ListGroupItem  className="ListGroupItem-hover">
+        {exercise.exercise_name}
         <Button className="right-vertical-align btn-transparent" onClick={ () => {this.props.addExerciseToWorkout(exercise)}}>
           <Glyphicon glyph="plus"/>
         </Button>
       </ListGroupItem>
       )
+    }
+
+    loadExercises() {
+      console.log("load exercises");
+      if (this.props.results.data != null) {
+        var data = JSON.parse(this.props.results.data);
+        return data;
+      }
+      return [];
     }
  
     render() {
@@ -71,7 +115,8 @@ class ExerciseList extends Component {
 
           <Row>
             <ListGroup className='exerciselist'>
-              {this.exerciseArray.map(this.renderExercises.bind(this))}
+              {/*this.exerciseArray.map(this.renderExercises.bind(this))*/}
+              {this.loadExercises().map(this.renderExercises.bind(this))}
             </ListGroup>
           </Row>
         </div>
@@ -79,4 +124,5 @@ class ExerciseList extends Component {
     }
   }
   
-  export default ExerciseList;
+  //export default ExerciseList;
+  export default connect(mapStateToProps, mapDispatchToProps)(ExerciseList);

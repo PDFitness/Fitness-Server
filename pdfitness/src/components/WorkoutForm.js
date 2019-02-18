@@ -60,10 +60,9 @@ class WorkoutForm extends Component {
       }
     }
 
-    addExerciseToWorkout(value) {
+    addExerciseToWorkout(exercise) {
       let workoutExerciseListNew = this.state.workoutExerciseList;
-      let addValue = value;
-      workoutExerciseListNew.push(addValue);
+      workoutExerciseListNew.push(exercise);
       this.setState({workoutExerciseList: workoutExerciseListNew});
       /*console.log(value);*/
     }
@@ -97,7 +96,7 @@ class WorkoutForm extends Component {
       console.log(workoutExercise);
       console.log(id);
       return (
-        <Exercise id={id} removeExercise={this.removeExerciseFromWorkout} exercise={workoutExercise}/>
+        <Exercise id={workoutExercise.id} removeExercise={this.removeExerciseFromWorkout} exercise={workoutExercise}/>
       )
     }
 

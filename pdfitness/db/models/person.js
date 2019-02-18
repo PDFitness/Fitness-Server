@@ -4,7 +4,7 @@ const Sequelize = require('sequelize')
 const db = require('../index.js');
 
 const Person = db.define('person', {
-  personID: {
+  id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true,
@@ -13,11 +13,11 @@ const Person = db.define('person', {
 		notEmpty: true,
 	  }
   },
-  firstName: {
+  first_name: {
   	type: Sequelize.STRING,
     allowNull: false
   },
-  lastName: {
+  last_name: {
   	type: Sequelize.STRING,
     allowNull: false
   },
@@ -25,12 +25,12 @@ const Person = db.define('person', {
   	type: Sequelize.STRING,
     allowNull: false
   },
-  phoneNumber: {
+  phone_number: {
     type: Sequelize.STRING,
     allowNull: true,
     defaultValue: null
   },
-  profilePicture: {
+  profile_picture: {
     type: Sequelize.STRING,
     allowNull: true,
     defaultValue: null

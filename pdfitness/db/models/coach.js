@@ -4,7 +4,7 @@ const Sequelize = require('sequelize')
 const db = require('../index.js');
 
 const Coach = db.define('coach', {
-  coachId: {
+  id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true,

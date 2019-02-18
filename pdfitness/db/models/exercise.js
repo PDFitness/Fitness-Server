@@ -4,7 +4,7 @@ const Sequelize = require('sequelize')
 const db = require('../index.js');
 
 const Exercise = db.define('exercise', {
-  exerciseId: {
+  id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true,
@@ -14,12 +14,12 @@ const Exercise = db.define('exercise', {
 	  }
   },
 
-  exerciseName: {
+  exercise_name: {
   	type: Sequelize.STRING,
     allowNull: false
   },
 
-  ExerciseDescription: {
+  exercise_description: {
     type: Sequelize.STRING,
     allowNull: true,
     defaultValue: null

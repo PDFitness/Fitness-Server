@@ -1,12 +1,11 @@
 const db = require('../db') //this is required
-const Exercise = require('../db/models/exercise');
+const Person = require('../db/models/person');
 
 
 const router = require('express').Router()
 
 router.get('/', function(req, res, next) {
-    Exercise.findAll({
-            order: [['id', 'ASC']]
+  Person.findAll({
         })
         .then(result => {
             res.status(200).send(result);
@@ -14,9 +13,9 @@ router.get('/', function(req, res, next) {
         .catch(next);
 });
 
-router.get('/:exerciseName', function(req, res, next) {
-    Exercise.findAll({
-            where:{exerciseName:req.params.exerciseName},
+router.get('/:personId', function(req, res, next) {
+  Person.findAll({
+            where:{personId:req.params.personId},
         })
         .then(result => {
             res.status(200).send(result);

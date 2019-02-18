@@ -28,7 +28,7 @@ class Exercise extends Component {
               <Col sm={4} className='vcenter'>
                     <div className="wrap">
                     <span>
-                        {this.props.exercise.name}
+                        {this.props.exercise.exercise_name}
                     </span>
                     </div>
               </Col>

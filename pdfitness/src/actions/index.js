@@ -49,3 +49,57 @@ export const dbTest = () => {
 
     }
 }
+
+export const DB_EXERCISES = "DB_EXERCISES"
+export const dbExercises = () => {
+    console.log("db exercises");
+    return dispatch => {
+        dispatch(dbTestStart());
+        axios.get(`/api/exercises`)
+            .then(res => dispatch(dbTestResults(JSON.stringify(res.data))))
+            .catch(err => dispatch(dbTestError(err)))
+
+    }
+}
+
+export const DB_WORKOUTS_BY_COACH = "DB_WORKOUTS_BY_COACH"
+export const dbWorkoutsByCoach = (id) => {
+    return dispatch => {
+        dispatch(dbTestStart());
+        axios.get(`/api/workouts/coach`, {
+            params: {
+                coach_id: id
+        }})
+            .then(res => dispatch(dbTestResults(JSON.stringify(res.data))))
+            .catch(err => dispatch(dbTestError(err)))
+
+    }
+}
+
+export const DB_WORKOUTS_SAVE = "DB_WORKOUTS_SAVE"
+export const dbWorkoutsSave = (id) => {
+    return dispatch => {
+        dispatch(dbTestStart());
+        axios.post(`/api/workouts/save`, {
+            params: {
+                coach_id: id
+        }})
+            .then(res => dispatch(dbTestResults(JSON.stringify(res.data))))
+            .catch(err => dispatch(dbTestError(err)))
+
+    }
+}
+
+export const DB_INCLUDES = "DB_INCLUDES"
+export const dbIncludes = (id) => {
+    return dispatch => {
+        dispatch(dbTestStart());
+        axios.get(`/api/includes/workout`, {
+            params: {
+                workout_id: id
+        }})
+            .then(res => dispatch(dbTestResults(JSON.stringify(res.data))))
+            .catch(err => dispatch(dbTestError(err)))
+
+    }
+}

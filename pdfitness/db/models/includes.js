@@ -4,7 +4,7 @@ const Sequelize = require('sequelize')
 const db = require('../index.js');
 
 const Includes = db.define('includes', {
-  includesId: {
+  id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true,
@@ -13,27 +13,27 @@ const Includes = db.define('includes', {
 		notEmpty: true,
 	  }
   },
-  Repetitions: {
+  repetitions: {
   	type: Sequelize.INTEGER,
     allowNull: true,
     defaultValue: null
   },
-  Duration: {
+  duration: {
   	type: Sequelize.TIME,
     allowNull: true,
     defaultValue: null
   },
-  Distance: {
+  distance: {
   	type: Sequelize.INTEGER,
     allowNull: true,
     defaultValue: null
   },
-  Weight: {
+  weight: {
   	type: Sequelize.INTEGER,
     allowNull: true,
     defaultValue: null
   },
-  Pace: {
+  pace: {
   	type: Sequelize.INTEGER,
     allowNull: true,
     defaultValue: null

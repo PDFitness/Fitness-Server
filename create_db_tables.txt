@@ -78,14 +78,16 @@ CREATE TABLE Includes
   FOREIGN KEY (ExerciseID) REFERENCES Exercise(ExerciseID)
 );
 
-CREATE TABLE Conducts
+CREATE TABLE Assigns
 (
+  CoachId INT NOT NULL
   WorkoutID INT NOT NULL,
   ClientID INT NOT NULL,
   CompletedDate DATE,
   TotalTime TIME,
   AssignDate DATE,
-  PRIMARY KEY (WorkoutID, ClientID),
+  PRIMARY KEY (CoachId, WorkoutID, ClientID),
+  FOREIGN KEY (CoachId) REFERENCES Coach(CoachID),
   FOREIGN KEY (WorkoutID) REFERENCES Workout(WorkoutID),
   FOREIGN KEY (ClientID) REFERENCES Client(ClientID)
 );

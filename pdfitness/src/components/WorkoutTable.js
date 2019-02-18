@@ -90,7 +90,9 @@ class WorkoutTable extends Component {
       return (
         <div>
           <h1>Workouts</h1>
-          <button onClick={this.props.actions.dbTest}>Test if Express and Sequelize are working</button>
+          <button onClick={() => this.props.actions.dbWorkoutsByCoach(1)}>List Workouts</button>
+          <button onClick={() => this.props.actions.dbWorkoutsSave(1)}>Save Workout</button>
+          <button onClick={() => this.props.actions.dbIncludes(1)}>Search Workout 1</button>
         <div style={{ padding: '30px' }}>{this.props.results}</div>
           <Table striped bordered hover>
             <thead>
