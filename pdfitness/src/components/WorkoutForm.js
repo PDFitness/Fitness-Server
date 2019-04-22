@@ -11,6 +11,8 @@ import * as Actions from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import * as dbActions from '../actions/actions.js';
+
   //testing db
 function mapStateToProps(state) {
     return {
@@ -28,16 +30,22 @@ class WorkoutForm extends Component {
     constructor(props, context) {
       super(props, context);
       this.state = {
-        workoutExerciseList:[],
+        workoutExerciseList:{},
         redirect: false,
         showEditExercise: false,
+        workoutListIndex: 0,
+        workoutName: '',
       };
       this.addExerciseToWorkout = this.addExerciseToWorkout.bind(this);
       this.removeExerciseFromWorkout = this.removeExerciseFromWorkout.bind(this);
+      this.updateWorkoutName = this.updateWorkoutName.bind(this);
     }
 
     saveWorkout = (e) => {
+      console.log("saving workout: " + this.state.workoutName);
       console.log(this.state.workoutExerciseList);
+      var workout = {id: 1, name: this.state.workoutName, exercises: this.state.workoutExerciseList}
+      dbActions.dbSaveWorkout(workout);
       //this.setRedirect();
       // Save the exercise id's to DB in order.
       // when retreiving workouts from DB, we will get them in ascending order.
@@ -61,22 +69,30 @@ class WorkoutForm extends Component {
     }
 
     addExerciseToWorkout(exercise) {
-      let workoutExerciseListNew = this.state.workoutExerciseList;
-      workoutExerciseListNew.push(exercise);
-      this.setState({workoutExerciseList: workoutExerciseListNew});
-      /*console.log(value);*/
+      var workoutExerciseListNew = this.state.workoutExerciseList;
+      workoutExerciseListNew[this.state.workoutListIndex] = exercise;
+      this.setState({
+        workoutExerciseList: workoutExerciseListNew,
+        workoutListIndex: this.state.workoutListIndex+1
+      });
+      console.log(workoutExerciseListNew);
     }
 
     removeExerciseFromWorkout(index) {
-      console.log(index);
+      console.log("removing index: "+index);
       console.log(this.state.workoutExerciseList);
-      var workoutExerciseListNew = [...this.state.workoutExerciseList];
+      var workoutExerciseListNew = this.state.workoutExerciseList;
       if (index !== -1) {
-        workoutExerciseListNew.splice(index, 1);
+        delete workoutExerciseListNew[index];
         this.setState({workoutExerciseList: workoutExerciseListNew});
       }      
       console.log(workoutExerciseListNew);
 
+    }
+
+    updateWorkoutName(event) {
+      //console.log("workout name: "+ event.target.value);
+      this.setState({workoutName: event.target.value});
     }
 
    /* workoutExerciseArray = [
@@ -92,17 +108,19 @@ class WorkoutForm extends Component {
       {id: 10, name: 'Running', distance: null, duration: null, repititions: null, weight: null, hrzone: null},
     ];
 */
-    renderWorkoutExercise(workoutExercise, id) {
-      console.log(workoutExercise);
-      console.log(id);
+    renderWorkoutExercise(workoutExerciseKey, value) {
+      /*console.log("render workout exercise key: "+workoutExerciseKey);
+      console.log(value);
+      console.log(this.state.workoutExerciseList[workoutExerciseKey]);*/
       return (
-        <Exercise id={workoutExercise.id} removeExercise={this.removeExerciseFromWorkout} exercise={workoutExercise}/>
+        <Exercise id={workoutExerciseKey} removeExercise={this.removeExerciseFromWorkout} exercise={this.state.workoutExerciseList[workoutExerciseKey]}/>
       )
     }
 
     render() {
       const {rowList} = this.state;
       const { ...props } = this.props;
+
       return (       
         <div className='fullheight'>
         {/*<Button bsStyle="primary" onClick={this.handleShow}>
@@ -122,12 +140,6 @@ class WorkoutForm extends Component {
         </Modal>
 
         <Grid style={{ marginLeft: 0, marginRight: 0, paddingBottom: 10, overflow:'hidden' }}>
-          {/*<button onClick={this.props.actions.dbTest}>Test if Express and Sequelize are working</button>
-          <div style={{ padding: '30px' }}>{this.props.results}</div>*/}
-                        {/*<Button onClick={this.addRow}>Add</Button>
-              <Button onClick={this.submitForm}>Submit</Button>
-              {this.renderRedirect()}
-              <Button onClick={this.cancel}>Cancel</Button>*/}
           <Row style={{height: '100%', paddingBottom: 10}}>
             <Col md={8}>
               <InputGroup 
@@ -135,11 +147,12 @@ class WorkoutForm extends Component {
                 <FormControl 
                   bsSize="large"
                   type="text"
-                  placeholder="Name Your Workout" />
+                  placeholder="Name Your Workout"
+                  onChange={evt => this.updateWorkoutName(evt)} />
               </InputGroup>
               <div>
               <ListGroup className='workoutexercises'>
-            {this.state.workoutExerciseList.map(this.renderWorkoutExercise.bind(this))}
+            {Object.keys(this.state.workoutExerciseList).map(this.renderWorkoutExercise.bind(this))}
               </ListGroup>
               </div>
             </Col>

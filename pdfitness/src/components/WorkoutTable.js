@@ -2,23 +2,7 @@ import React, { Component } from 'react';
 import ClientList from './ClientList'
 import { Table, Button, Modal} from 'react-bootstrap';
 
-//db test
-import * as Actions from '../actions';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-
-  //testing db
-function mapStateToProps(state) {
-    return {
-      results: state.demo.results
-    }
-  }
-  
-function mapDispatchToProps(dispatch) {
-    return {
-      actions: bindActionCreators(Actions, dispatch)
-    };
-  }
+import * as dbActions from '../actions/actions.js';
 
 class WorkoutTable extends Component { 
   constructor(props) {
@@ -26,6 +10,7 @@ class WorkoutTable extends Component {
     this.state = { 
       showClientsPopUp: false,
       selectedWorkout: 0,
+      workoutArray: [],
      };
     this.clientList = null;
 
@@ -33,9 +18,23 @@ class WorkoutTable extends Component {
     this.handleAssignOnClick = this.handleAssignOnClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleAssignSubmit = this.handleAssignSubmit.bind(this);
+
+    this.loadWorkouts = this.loadWorkouts.bind(this);
   }
 
-  workoutArray = [
+  /**
+   * When component is mounted, get workouts from database and update state.
+   */
+  componentDidMount() {
+    console.log("Getting workouts from DB");
+    //TODO: change the coachId parameter
+    dbActions.dbWorkoutsByCoach(1).then( result => {
+      console.log(result);
+      this.setState({ workoutArray: result });
+    });
+  }
+
+  /*workoutArray = [
                   {name:"Running Workout 1",duration:"0",date:"today"},
                   {name:"Running Workout 2",duration:"0",date:"today"},
                   {name:"Running Workout 3",duration:"0",date:"today"},
@@ -45,7 +44,7 @@ class WorkoutTable extends Component {
                   {name:"Running Workout 7",duration:"0",date:"today"},
                   {name:"Running Workout 8",duration:"0",date:"today"},
                   {name:"Running Workout 9",duration:"0",date:"today"},
-                  ];
+                  ];*/
 
 
   handleClose() {
@@ -84,16 +83,20 @@ class WorkoutTable extends Component {
       </tr>
     )
   }
+
+  loadWorkouts(){
+    console.log("load workouts");
+    if (this.state.workoutArray != null) {
+      return this.state.workoutArray;
+    }
+    return [];
+  }
   
   render () {
     const { ...props } = this.props;
       return (
         <div>
           <h1>Workouts</h1>
-          <button onClick={() => this.props.actions.dbWorkoutsByCoach(1)}>List Workouts</button>
-          <button onClick={() => this.props.actions.dbWorkoutsSave(1)}>Save Workout</button>
-          <button onClick={() => this.props.actions.dbIncludes(1)}>Search Workout 1</button>
-        <div style={{ padding: '30px' }}>{this.props.results}</div>
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -104,7 +107,8 @@ class WorkoutTable extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.workoutArray.map(this.renderWorkouts.bind(this))}
+              {/*{this.workoutArray.map(this.renderWorkouts.bind(this))}*/}
+              {this.loadWorkouts().map(this.renderWorkouts.bind(this))}
             </tbody>
           </Table>
 <div>
@@ -131,4 +135,4 @@ class WorkoutTable extends Component {
 }
 
 //export default WorkoutTable;
-export default connect(mapStateToProps, mapDispatchToProps)(WorkoutTable);
+export default WorkoutTable;

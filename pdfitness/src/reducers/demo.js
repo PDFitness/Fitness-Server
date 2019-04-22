@@ -10,7 +10,7 @@ const demo = (state = initialState, action) => {
             return { ...state, results: "Test Succeeded!  " + action.data }
         case DB_TEST_RESULTS:
             //return { ...state, results: "Test Succeeded!  " + action.data }
-            return { ...state, results: action }
+            return { ...state, results: action.data }
         case EXPRESS_TEST_ERROR:
             return { ...state, results: "Test Failed!  " + action.data }
         case DB_TEST_ERROR:

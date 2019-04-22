@@ -70,7 +70,10 @@ export const dbWorkoutsByCoach = (id) => {
             params: {
                 coach_id: id
         }})
-            .then(res => dispatch(dbTestResults(JSON.stringify(res.data))))
+            .then(res => {
+                console.log(res);
+                dispatch(dbTestResults(JSON.stringify(res.data)));
+            })
             .catch(err => dispatch(dbTestError(err)))
 
     }
@@ -84,7 +87,10 @@ export const dbWorkoutsSave = (id) => {
             params: {
                 coach_id: id
         }})
-            .then(res => dispatch(dbTestResults(JSON.stringify(res.data))))
+            .then(res => {
+                //console.log(res);
+                dispatch(dbTestResults(JSON.stringify(res.data)));
+            })
             .catch(err => dispatch(dbTestError(err)))
 
     }

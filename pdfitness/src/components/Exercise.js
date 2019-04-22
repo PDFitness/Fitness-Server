@@ -11,6 +11,11 @@ const options = ["Running", "Dumbbell Curls"];
 class Exercise extends Component {
     constructor(props, context) {
       super(props, context);
+      this.state = {
+        id: this.props.id,
+      };
+      console.log("exercise array id: "+ this.props.id);
+      console.log("exercise array value: "+ this.props.exercise.exercise_name);
     }
  
     render() {

@@ -9,6 +9,8 @@ import * as Actions from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import * as dbActions from '../actions/actions.js';
+
   //testing db
 function mapStateToProps(state) {
     return {
@@ -29,14 +31,22 @@ class ExerciseList extends Component {
       this.state = {
         exerciseArray: [],
       };
+
+      this.loadExercises = this.loadExercises.bind(this);
     }
 
+    /**
+     * When component is mounted, get exercises from database and update state.
+     */
     componentDidMount() {
-      console.log("Loading exrecise list");
-      this.props.actions.dbExercises();
+      console.log("Loading exercise list");
+      dbActions.dbGetExercises().then( result => {
+        console.log(result);
+        this.setState({ exerciseArray: result });
+      });
     }
 
-    exerciseArray = [
+    /*exerciseArray = [
       {id: 1, name:"Running"},
       {id: 2, name:"Pushup"},
       {id: 3, name:"Pullup"},
@@ -57,7 +67,7 @@ class ExerciseList extends Component {
       {id: 18, name:"Running"},
       {id: 19, name:"Running"},
       {id: 20, name:"Running"},
-      ];
+      ];*/
 
     renderExercises(exercise, index) {
       index = index + 1
@@ -70,7 +80,7 @@ class ExerciseList extends Component {
       </ListGroupItem>*/
       /*{id: 1, exercise_name: "Running", exercise_description: "Running on road or treadmill", 
       createdAt: "2019-02-18T00:18:48.431Z", updatedAt: "2019-02-18T00:18:48.431Z"}*/
-      <ListGroupItem  className="ListGroupItem-hover">
+      <ListGroupItem  key={index} className="ListGroupItem-hover">
         {exercise.exercise_name}
         <Button className="right-vertical-align btn-transparent" onClick={ () => {this.props.addExerciseToWorkout(exercise)}}>
           <Glyphicon glyph="plus"/>
@@ -79,12 +89,19 @@ class ExerciseList extends Component {
       )
     }
 
+    /**
+     * The props.results will change to another result when another API is called,
+     * then there will be an error because the exercises will be not the right values.
+     * SOLUTION: have a seperate API call thta returns to here?
+     * so no attached to global props. need more research 
+     */
     loadExercises() {
       console.log("load exercises");
-      if (this.props.results.data != null) {
-        var data = JSON.parse(this.props.results.data);
-        return data;
+      if (this.state.exerciseArray != null) {
+        return this.state.exerciseArray;
       }
+      //TODO exerciseArray is never null becuase it is initialized to []
+      // is this method even needed?
       return [];
     }
  
